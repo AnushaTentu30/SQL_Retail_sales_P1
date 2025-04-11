@@ -94,16 +94,16 @@ WHERE
 
 3. **Write a SQL query to calculate each category's total sales (total_sale).**:
 ```sql
-select category, 
-		    sum(total_sale) as total_sales,
-			count(*) as total_orders
-	from retail_sales
-	group by category;
+Select category, 
+	sum(total_sale) as total_sales,
+	count(*) as total_orders
+from retail_sales
+group by category;
 ```
 
 4. **Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.**:
 ```sql
-SELECT
+Select
     ROUND(AVG(age), 2) as avg_age
 FROM retail_sales
 WHERE category = 'Beauty';
@@ -111,74 +111,74 @@ WHERE category = 'Beauty';
 
 5. **Write a SQL query to find all transactions where the total_sale is greater than 1000.**:
 ```sql
-SELECT * FROM retail_sales
+Select * FROM retail_sales
 WHERE total_sale > 1000;
 ```
 
 6. **Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.**:
 ```sql
-select gender,
-		   category, 
-		   count(transactions_id) as Total_transactions
-	from retail_sales
-	group by gender, category;
+Select gender,
+	category, 
+	count(transactions_id) as Total_transactions
+from retail_sales
+group by gender, category;
 ```
 
 7. **Write a SQL query to calculate the average sale for each month. Find out best selling month in each year**:
 ```sql
-select 
-		year,
-		month,
-		avg_sales
+Select 
+    year,
+    month,
+    avg_sales
 from
-	(
-		select 
-			Extract (year from sale_date) as year,
-			Extract (month from sale_date) as month,
-			avg(total_sale) as avg_sales,
-			rank() over(partition by Extract (year from sale_date) order by avg(total_sale) desc) as rank
-		from retail_sales
-		group by year, month
-	) as t1
-		where rank=1;
+    (
+    select 
+    Extract (year from sale_date) as year,
+    Extract (month from sale_date) as month,
+    avg(total_sale) as avg_sales,
+    rank() over(partition by Extract (year from sale_date) order by avg(total_sale) desc) as rank
+from retail_sales
+group by year, month
+    ) as t1
+where rank=1;
 ```
 
 8. **Write a SQL query to find the top 5 customers based on the highest total sales **:
 ```sql
-select 
-		customer_id, 
-		sum(total_sale) as highest_sales
-	from retail_sales
-	group by customer_id
-	order by highest_sales desc
-	limit 5;
+Select 
+	customer_id, 
+	sum(total_sale) as highest_sales
+from retail_sales
+group by customer_id
+order by highest_sales desc
+limit 5;
 ```
 
 9. **Write a SQL query to find the number of unique customers who purchased items from each category.**:
-```select 
-		count(distinct customer_id) as Distinct_customers,
-		category
-	from retail_sales
-	group by category;
+```Select 
+	count(distinct customer_id) as Distinct_customers,
+	category
+from retail_sales
+group by category;
 ```
 
 10. **Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17)**:
 ```sql
 with hourly_sale
   as (
-	 select 8,
-		case
-			when extract(hour from sale_time) <12 then 'Morning'
-			when extract(hour from sale_time) between 12 and 17 then 'Afternoon'
-			else 'evening'
-		end as shift
-	 from retail_sales
-	 )
-	 select
-	 	shift,
-		count(*) as total_orders
-	 from hourly_sale
-	 group by shift;
+     select 8,
+	case
+           when extract(hour from sale_time) <12 then 'Morning'
+           when extract(hour from sale_time) between 12 and 17 then 'Afternoon'
+           else 'evening'
+	   end as shift
+from retail_sales
+     )
+select
+         shift,
+         count(*) as total_orders
+from hourly_sale
+group by shift;
 ```
 
 ## Findings
@@ -198,16 +198,9 @@ with hourly_sale
 
 This project serves as a comprehensive introduction to SQL for data analysts, covering database setup, data cleaning, exploratory data analysis, and business-driven SQL queries. The findings from this project can help drive business decisions by understanding sales patterns, customer behavior, and product performance.
 
-## How to Use
-
-1. **Clone the Repository**: Clone this project repository from GitHub.
-2. **Set Up the Database**: Run the SQL scripts provided in the `database_setup.sql` file to create and populate the database.
-3. **Run the Queries**: Use the SQL queries provided in the `analysis_queries.sql` file to perform your analysis.
-4. **Explore and Modify**: Feel free to modify the queries to explore different aspects of the dataset or answer additional business questions.
-
 
 
 - **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/anusha-tentu-393a6a233?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BKG3c8iK%2BTzSuHa7xtuYkEw%3D%3D)
--
+
 
 Thank you!
