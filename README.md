@@ -143,7 +143,7 @@ group by year, month
 where rank=1;
 ```
 
-8. **Write a SQL query to find the top 5 customers based on the highest total sales **:
+8. **Write a SQL query to find the top 5 customers based on the highest total sales  **:
 ```sql
 Select 
 	customer_id, 
@@ -155,7 +155,8 @@ limit 5;
 ```
 
 9. **Write a SQL query to find the number of unique customers who purchased items from each category.**:
-```Select 
+```sql
+Select 
 	count(distinct customer_id) as Distinct_customers,
 	category
 from retail_sales
